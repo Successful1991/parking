@@ -1,21 +1,47 @@
-<form action="">
-<label>обычные : <input type="number" min="0" max="100" [(ngModel)]=" addCars.usual.amount" name="fut.usual"></label>
-<label>грузовые : <input type="number" min="0" max="100" [(ngModel)]="addCars.cargo.amount" name="fut.cargo"></label>
-<label>инвалиды : <input type="number" min="0" max="100" [(ngModel)]="addCars.carDisabledPerson.amount" name="fut.carDisabledPerson"></label>
-  <button type="button" (click)="setCar()" ></button>
-</form>
 
-<div>
-  <ul (click)="delCar($event)">
-    <li *ngFor="let res of parkingList " id="{{res.id}}"> {{res.id}} : {{res.carType}} : {{res.status}}</li>
-  </ul>
+<div class="info">
+  <form action="" class="entering__cars">
+    <p>Добавить машины</p>
+    <div class="entering__cars__label">
+      <label>Легковые<input type="number" min="0" max="100" [(ngModel)]=" addCars.usual.amount" name="fut.usual"></label>
+      <label>Грузовые<input type="number" min="0" max="100" [(ngModel)]="addCars.cargo.amount" name="fut.cargo"></label>
+      <label>Инвалиды<input type="number" min="0" max="100" [(ngModel)]="addCars.carDisabledPerson.amount" name="fut.carDisabledPerson"></label>
+    </div>
+    <button type="button" (click)="setCar()" class="button__add">add</button>
+  </form>
+  <div class="emptySeat">
+    <p>Cвободных мест</p>
+    <div class="emptySeat__all">
+      <div>
+      Грузовые
+        <div class="emptySeat__all__amount">
+          {{emptySeat.cargo.amount}}
+        </div>
+
+      </div>
+      <div>
+      Легковые
+        <div class="emptySeat__all__amount">
+          {{emptySeat.usual.amount}}
+        </div>
+    </div>
+      <div>
+      Инвалиды
+        <div class="emptySeat__all__amount">
+          {{emptySeat.carDisabledPerson.amount}}
+        </div>
+    </div>
+    </div>
+  </div>
 </div>
 
 <div>
-  <ul>
-    <li>свободных мест :</li>
-    <li>{{emptySeat.cargo.type}} : {{emptySeat.cargo.amount}}</li>
-    <li>{{emptySeat.usual.type}} : {{emptySeat.usual.amount}}</li>
-    <li>{{emptySeat.carDisabledPerson.type}} : {{emptySeat.carDisabledPerson.amount}}</li>
+  <ul (click)="delCar($event)" class="parking">
+    <li *ngFor="let res of parkingList "  class="parking__places {{res.carType}}">
+      <span class="car {{res.zaniato.type}}__active" id="{{res.id}}"></span>
+
+    </li>
   </ul>
 </div>
+
+

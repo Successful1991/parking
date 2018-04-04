@@ -1,7 +1,8 @@
 export class Car {
   constructor(
     public carType: string,
-    public id: number
+    public id: number,
+    public zaniato: {} = {}
   ){}
 
 }
@@ -13,6 +14,5 @@ export class Places extends Car{
   }
 
 }
-
 
 

@@ -9,15 +9,15 @@ export class CarService {
   parkingParameters = [
     {
       type: 'carDisabledPerson',
-      amount: 6
+      amount: 3,
     },
     {
       type: 'usual',
-      amount: 12
+      amount: 8,
     },
     {
       type: 'cargo',
-      amount: 6
+      amount: 4,
     }
   ];
 
@@ -40,19 +40,17 @@ export class CarService {
   addedCarsList;
   parkingList = [];
 
-
   addPlaces(){
-    this.parkingParameters.filter( placeType => {
+    this.parkingParameters.forEach( placeType => {
       for(let i = 0 ; i < placeType.amount ; i++){
-        this.parkingList.push(new Places(placeType.type, this.parkingList.length+1 ));
+        this.parkingList.push(new Places(placeType.type,(this.parkingList.length+1) ));
       }
     });
     return this.parkingList;
   }
 
   getEmptySeat(){
-
-      this.parkingList.filter( place =>{
+      this.parkingList.forEach( place =>{
         if( this.emptySeat.usual.type === place.carType && place.status === false){
           return this.emptySeat.usual.amount +=1;
         }
@@ -66,38 +64,28 @@ export class CarService {
       return this.emptySeat;
   }
 
-
   checkEmptySeats(cars){
     this.addedCarsList = cars;
-      if( cars.cargo.amount > 0 && this.emptySeat.cargo.amount > 0){
-        this.addCarParkingList( cars.cargo.type, cars.cargo , this.emptySeat.cargo );
-      }
-      if(cars.usual.amount > 0 && this.emptySeat.usual.amount > 0){
-        this.addCarParkingList( cars.usual.type ,cars.usual  , this.emptySeat.usual);
-      }
-      if(cars.carDisabledPerson.amount > 0 && this.emptySeat.carDisabledPerson.amount > 0){
-        this.addCarParkingList(cars.carDisabledPerson.type ,cars.carDisabledPerson  , this.emptySeat.carDisabledPerson);
-      }
-    this.addCarsCertainType(cars);
-    return this.parkingList;
-   }
 
-
-
-  addCarsCertainType(cars){
-    if(cars.carDisabledPerson.type === "carDisabledPerson" && cars.carDisabledPerson.amount > 0){
-      this.addCarDisabledPerson(cars , cars.carDisabledPerson);
+    if(cars.carDisabledPerson.amount > 0 && this.emptySeat.carDisabledPerson.amount > 0){
+      this.addCarParkingList(cars.carDisabledPerson.type, cars.carDisabledPerson , this.emptySeat.carDisabledPerson);
     }
-    else if(cars.usual.type === "usual" && cars.usual.amount > 0){
+    if(cars.usual.amount > 0 && this.emptySeat.usual.amount > 0){
       this.addCarUsual(cars , cars.usual);
     }
-    else if(cars.cargo.type === "cargo" && this.emptySeat.cargo.amount === 0){
-      console.log("не поместились машины типа cargo" , cars.amount , "шт")
-    }
-    else if( cars.cargo.type === "cargo" && cars.cargo.amount > 0 ){
+    if( cars.cargo.amount > 0 && this.emptySeat.cargo.amount > 0){
       this.addCarCargo(cars , cars.cargo);
     }
+    if( cars.usual.amount > 0 && this.emptySeat.usual.amount === 0){
+      this.addCarCargo(cars , cars.usual);
+    }
+    if(cars.carDisabledPerson.amount > 0 && this.emptySeat.carDisabledPerson.amount === 0){
+      this.addCarDisabledPerson(cars , cars.carDisabledPerson);
+    }
+
+    return this.parkingList;
   }
+
 
   addCarCargo(cars , car){
     if( this.emptySeat.cargo.amount > 0 ){
@@ -120,29 +108,33 @@ export class CarService {
     }
 
   addCarDisabledPerson(cars , car){
-  if(this.emptySeat.carDisabledPerson.amount === 0){
+    if( this.emptySeat.usual.amount > 0){
       this.addCarUsual(cars , car);
     }
-    else( console.log("не все машины обработались"));
+    if( this.emptySeat.cargo.amount > 0){
+      this.addCarCargo(cars , car);
+    }
+
   }
+
 
   addCarParkingList(type ,car , emptyseat){
     this.parkingList.forEach( places => {
       if( type === places.carType && places.status === false && car.amount > 0 ){
         places.status = true;
+        places.zaniato = car;
         car.amount -= 1;
         emptyseat.amount -= 1;
       }
     });
-    if(car.amount > 0){
-      this.addCarsCertainType(this.addedCarsList);
-    }
   }
 
   delCar(id){
+    console.log(id);
     this.parkingList.forEach( places => {
       if( id === places.id && places.status === true ){
         places.status = false;
+        places.zaniato = "";
         this.addPlaceAfterDeletingCar(places);
         }
     });

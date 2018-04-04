@@ -7,24 +7,27 @@ import {CarService} from './car/car.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private carService: CarService ) {}
+  constructor(private carService: CarService) {
+  }
+
   parkingList;
   addCars = {
-  carDisabledPerson : {
-      type: "carDisabledPerson",
-      amount: 0
+    carDisabledPerson: {
+      type: 'carDisabledPerson',
+      amount: 3
     },
-  cargo : {
-     type: "cargo",
-      amount: 0
-   },
-  usual : {
-    type: "usual",
-    amount: 0
-  }};
+    cargo: {
+      type: 'cargo',
+      amount: 4
+    },
+    usual: {
+      type: 'usual',
+      amount: 3
+    }
+  };
   emptySeat;
 
-  setCar(){
+  setCar() {
     this.carService.checkEmptySeats(this.addCars);
   }
 
@@ -34,6 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   delCar(event) {
+    console.log(event);
     let id = Number(event.target.id);
     this.carService.delCar(id);
   }

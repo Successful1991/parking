@@ -1,0 +1,163 @@
+.info{
+  display: flex;
+  justify-content: center;
+}
+.car{
+  height: 100%;
+  width: 100%;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.entering__cars{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 1;
+  height: 140px;
+  width: 35vw;
+  border: 2px dashed #51eec5;
+  border-radius: 15px;
+  margin: 20px 20px 20px 40px;
+  label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 20px;
+    input{
+      border: 2px solid #9eebee;
+      border-radius: 5px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  &__label{
+    display: flex;
+  }
+  p{
+    margin:10px 0 0 0;
+  }
+}
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+}
+
+.emptySeat{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+  height: 140px;
+  width: 35vw;
+  border: 2px dashed #51eec5;
+  border-radius: 15px;
+  margin: 20px;
+  padding: 0;
+  font-size: 22px;
+  font-family: "Helvetica Neue";
+  &__all{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    &__amount{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      border-radius: 5px;
+      border: 2px solid #09c200;
+    }
+  }
+  p{
+    margin: 10px;
+    font-size: 18px;
+  }
+}
+
+
+.parking{
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  max-width: 1280px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0 0 0 40px;
+  border-left: 6px dashed #eeeeee;
+  &__places{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 200px;
+    width: 20%;
+    border: 6px solid gray;
+    box-sizing: border-box;
+    margin: 0 -3px;
+    z-index: 3;
+  }
+  >li:nth-child(-n+5){
+    margin-bottom: 80px;
+    border-bottom: none;
+    :after{
+      display: flex;
+      margin-top: 223px;
+      margin-left: -40px;
+      content: "";
+      width: 136%;
+      height: 0;
+      border-bottom: 6px dashed #eeeeee;
+    }
+  }
+  >li:nth-child(n+6){
+      border-top: none;
+    }
+  >li:nth-child(n+11){
+    margin-bottom: 30px;
+    border-bottom: none;
+  }
+}
+
+.carDisabledPerson{
+  background: #eee876 url(../assets/img/DesabledPerson.png) center no-repeat;
+  background-size: 40%;
+  &__active{
+    background: url(../assets/img/desabledPersonCar.png) center no-repeat;
+    background-size: 100%;
+  }
+}
+.usual{
+  background: #51eec5 url(../assets/img/usual.png) center no-repeat;
+  background-size: 50%;
+  &__active{
+    background: url(../assets/img/usualCar.png) center no-repeat;
+    background-size: 70%;
+  }
+}
+.cargo{
+  background: #ee5c8c url(../assets/img/cargo.png) center no-repeat;
+  background-size: 50%;
+  &__active{
+    background: url(../assets/img/cargoCar.png) center bottom no-repeat;
+    background-size: 70%;
+  }
+}
+
+.button__add{
+  width: 50%;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  border: 1px solid darken(#eeeeee, 5%);
+  box-shadow: -5px 5px 10px rgba(0,0,0,0.2);
+  :focus{
+    outline: 1px solid #eeeeee;
+  }
+
+}
