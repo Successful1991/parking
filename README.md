@@ -1,3 +1,20 @@
+#Description
+
+Application for calculation of empty parking spaces.
+forms the parking with blank spaces of 3 types:
+1) places for disabled people;
+2) places for passenger cars;
+3) places for lorries;
+
+There are fields for addition of cars on the parking (it is possible to add at the same time different types of cars in any quantity).
+the application calculates how many remained empty seats of each type and how many cars can't will be located on the parking due to the lack of places.
+
+Logic of the application
+1) trucks can take places only for trucks.
+2) cars can take places for legkovy cars and trucks.
+3) cars of disabled people can take any places on the parking.
+any car takes the place of the type if is free if there are no places of the type takes the parking space of other type.
+
 # Autoparking2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
